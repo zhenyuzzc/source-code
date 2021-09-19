@@ -1,0 +1,12 @@
+names=['xian','tianji','beijing','shanghai','hebei']
+print(names)
+print(sorted(names))
+names.reverse()
+print(names)
+names.reverse()
+print(names)
+names.sort()
+print(names)
+names.sort(reverse=True)
+print(names)
+len(names)
