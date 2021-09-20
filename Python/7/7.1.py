@@ -7,7 +7,7 @@ if user > 8:
     print("不好意思已经没8位以上的桌子")
 else:
     print("好的，请跟我这里走")
-
+    
 sz = input("请输入一共数:" )
 sz = int(sz)
 if sz%10 == 0:
