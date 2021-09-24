@@ -6,6 +6,7 @@ class User:
         self.jg = jg
         self.age = age
         self.love = love
+        self.login_attempts = 0
 
     def describe_user(self):
         print(f"姓名：{self.first_name}{self.last_name}")
@@ -13,6 +14,12 @@ class User:
 
     def greet_user(self):
         print(f"{self.first_name}{self.last_name} 欢迎你的加入")
+
+    def increment_login_attempts(self):
+        self.login_attempts =self.login_attempts + 1
+
+    def reset_login_attemots(self):
+        self.login_attempts = 0
 
 zjf = User('朱','进峰','男','河北',16,'音乐')
 zjf.describe_user()
@@ -28,3 +35,18 @@ hbh = User('胡','宝华','女','河北',40,'跳舞')
 hbh.describe_user()
 hbh.greet_user()
 print()
+
+hbh.increment_login_attempts()
+print(hbh.login_attempts)
+hbh.increment_login_attempts()
+print(hbh.login_attempts)
+hbh.increment_login_attempts()
+print(hbh.login_attempts)
+hbh.increment_login_attempts()
+print(hbh.login_attempts)
+hbh.increment_login_attempts()
+print(hbh.login_attempts)
+hbh.increment_login_attempts()
+print(hbh.login_attempts)
+hbh.reset_login_attemots()
+print(hbh.login_attempts)
