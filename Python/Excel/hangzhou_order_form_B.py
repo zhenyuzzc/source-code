@@ -6,7 +6,8 @@ from xlutils.copy import copy
 row = [] #存储每行数据的空列表
 data = xlrd.open_workbook('订单信息.xlsx') #打开工作表
 sheet_name = data.sheet_names() #获取所有工作表的名字
-sheet1 = data.sheet_by_name('厨房支架') #用工作表名获取其内容并赋值给表量
+#print(sheet_name)
+sheet1 = data.sheet_by_index(0) #用工作表名获取其内容并赋值给表量
 row_number = sheet1.nrows #获取工作表的总行数
 
 #遍历工作表每行内容并赋值到row列表
@@ -58,10 +59,10 @@ def my_style_2():
     
     return my_style
 
-merged = sheet1.merged_cells #获取表格中所有合并单元格位置，以列表形式返回（起始行，结束行，起始列，结束列）
 #print(merged)
 def get_cell_type(row_index, col_index):
     """既能得到合并单元格也能得到普通单元格"""
+    merged = sheet1.merged_cells #获取表格中所有合并单元格位置，以列表形式返回（起始行，结束行，起始列，结束列）
     cell_value = None
     for (rlow, rhigh, clow, chigh) in merged:  # 遍历表格中所有合并单元格位置信息
         # print(rlow,rhigh,clow,chigh)
