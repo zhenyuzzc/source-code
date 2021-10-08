@@ -19,15 +19,15 @@ def my_style_1():
     
     font = xlwt.Font() #设置字体样式
     font.name = '微软雅黑'
-    font.bold = True
-    font.height = 240
+    font.bold = True #字体加粗
+    font.height = 240 #字号由20*12得来即12号字体
     
     borders =xlwt.Borders() #设置边框样式
-    borders.bottom = xlwt.Borders.THIN
+    borders.bottom = xlwt.Borders.THIN #下边框
     
     alignment = xlwt.Alignment() #设置单元格位置
-    alignment.horz = xlwt.Alignment.HORZ_CENTER
-    alignment.vert = xlwt.Alignment.VERT_CENTER
+    alignment.horz = xlwt.Alignment.HORZ_CENTER #水平居中
+    alignment.vert = xlwt.Alignment.VERT_CENTER #垂直居中
     
     my_style = xlwt.XFStyle() #初始化样式
     my_style.font = font
@@ -67,7 +67,7 @@ def get_cell_type(row_index, col_index):
         # print(rlow,rhigh,clow,chigh)
         if (row_index >= rlow and row_index < rhigh):  # 行坐标判断
             if (col_index >= clow and col_index < chigh):  # 列坐标判断
-                # 如果满足条件，就把合并单元格第一个位置的值赋给其它合并单元格
+                #如果满足条件，就把合并单元格第一个位置的值赋给其它合并单元格
                 cell_value = sheet1.cell_value(rlow, clow)
                 #print('合并单元格')
                 break  # 不符合条件跳出循环，防止覆盖
@@ -75,8 +75,8 @@ def get_cell_type(row_index, col_index):
                 #print('普通单元格')
                 cell_value = sheet1.cell_value(row_index, col_index)
  
-        else:  #添加改行后只那一个单元格的内容5，0 会返回2个值普通单元格/合并单元格
-            #     print('普通单元格')
+        else:  #添加改行后的那一个单元格的内容5，0 会返回2个值普通单元格/合并单元格
+            #print('普通单元格')
             cell_value = sheet1.cell_value(row_index, col_index)
  
     return cell_value
