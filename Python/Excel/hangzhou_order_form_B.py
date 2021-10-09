@@ -59,10 +59,10 @@ def my_style_2():
     
     return my_style
 
-#print(merged)
 def get_cell_type(row_index, col_index):
     """既能得到合并单元格也能得到普通单元格"""
     merged = sheet1.merged_cells #获取表格中所有合并单元格位置，以列表形式返回（起始行，结束行，起始列，结束列）
+    #print(merged)
     cell_value = None
     for (rlow, rhigh, clow, chigh) in merged:  # 遍历表格中所有合并单元格位置信息
         # print(rlow,rhigh,clow,chigh)
@@ -83,22 +83,37 @@ def get_cell_type(row_index, col_index):
     return cell_value
 
 
-readbook = xlrd.open_workbook('送货通知书/杭州送货通知书.xls',formatting_info=True) #复制工作表用来添加数据
+readbook = xlrd.open_workbook('送货通知书/送货通知书.xls',formatting_info=True) #复制工作表用来添加数据
 wb = copy(readbook)
 ws = wb.get_sheet(0)
 
 dh_date = input('输入到货日期（格式2021-01-01或2021/01/01）： ') #输入到货日期赋值到变量dh_date
 
 i = 1
+HZ_LXR_1,HZ_TEL_1,HZ_LXR_2,HZ_TEL_2,HZ_PX = '金晓艳','13758225151','巨世颂','18657157807','杭州KFC配销'
+SZ_TEL_1,SZ_LXR_2,SZ_TEL_2,SZ_PX = '0512-69582056','仓储值班经理','0512-69582056','苏州物流中心'
+
 for value in row:
     style_1 = my_style_1()
     style_2 = my_style_2()
-    ws.write(3,1,get_cell_type(i,7),style_2) #写入公司信息
+    ws.write(3,1,get_cell_type(i,1),style_2) #写入公司信息
     ws.write(10,3,dh_date,style_1) #写入到货日期
     ws.write(12,3,get_cell_type(i,3),style_1) #写入订单号
     ws.write(18,3,value[22],style_1) #写入品相名称
     ws.write(20,3,value[21],style_1) #写入品相JDE
     ws.write(22,3,value[14],style_1) #写入收货数量
     ws.insert_bitmap('送货通知书/hz_logo.bmp',0,4) #插入图片
-    wb.save(f'送货通知书/hangzhou_new/{get_cell_type(i,3)}-{int(value[21])}杭州送货通知书.xls') #保存工作簿
+    if get_cell_type(i,1) == '杭州肯德基有限公司':
+        ws.write(5,1,HZ_LXR_1,style_2)
+        ws.write(6,1,int(HZ_TEL_1),style_2)
+        ws.write(5,4,HZ_LXR_2,style_2)
+        ws.write(6,4,int(HZ_TEL_2),style_2)
+        ws.write(3,4,HZ_PX,style_2)
+        wb.save(f'送货通知书/杭州送货通知书/{get_cell_type(i,3)}-{int(value[21])}杭州送货通知书.xls') #保存工作簿
+    elif get_cell_type(i,1) == '苏州肯德基有限公司':
+        ws.write(6,1,int(HZ_TEL_1),style_2)
+        ws.write(5,4,HZ_LXR_2,style_2)
+        ws.write(6,4,int(HZ_TEL_2),style_2)
+        ws.write(3,4,HZ_PX,style_2)
+        wb.save(f'送货通知书/苏州送货通知书/{get_cell_type(i,3)}-{int(value[21])}苏州送货通知书.xls') #保存工作簿
     i += 1
